@@ -145,6 +145,14 @@
             <p id="charCount">0 Characters</p>
             <button onclick="submitFeedback()">Submit Feedback</button>
         </section>
+        <section id="video">
+            <h2>Event promo video</h2>
+            <video id="promoVideo" width="400px" controls oncanplay="videoReady()">
+                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                your browser does not support video
+            </video>
+            <p id="videoMSG"></p>
+        </section>
         </main>
         <!--footer-->
         <footer>
@@ -175,6 +183,15 @@
             }
             function submitFeedback() {
                 alert('✅ Feedback submitted! Thank you!');
+            }
+            function videoReady(){
+                document.getElementById('videoMSG').textContent='✅ Video ready to play!';
+            }
+            window.onbeforeunload = function(){
+                const name=document.getElementById('phone').value;
+                if(name !== ''){
+                    return 'You have unfinished form data, Are you sure want to leave ?';
+                }
             }
         </script>
     </body>
