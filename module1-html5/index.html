@@ -153,6 +153,19 @@
             </video>
             <p id="videoMSG"></p>
         </section>
+        <section id="preferences">
+            <h2>Your Preferences</h2>
+            <label>Preferred event type: </label>
+            <select id="prefEvent" onChange="savePreference()">
+                <option value="">-- Select preference --</option>
+                <option value="music">Music festival</option>
+                <option value="food">Food carnival</option>
+                <option value="tech">Tech meet-up</option>
+                <option value="cultural">cultural night</option>
+            </select>
+            <p id="prefMsg"></p>
+            <button onclick="clearPreferences()">Clear Preferences</button>
+        </section>
         </main>
         <!--footer-->
         <footer>
@@ -192,6 +205,24 @@
                 if(name !== ''){
                     return 'You have unfinished form data, Are you sure want to leave ?';
                 }
+            }
+            function savePreference(){
+                const pref=document.getElementById('prefEvent').value;
+                localStorage.setItem('eventPreference',pref);
+                document.getElementById('prefMsg').textContent=`✅ Preference saved: ${pref}`;
+            }
+            window.onload=function(){
+                const saved=localStorage.getItem('eventPreference');
+                if(saved){
+                    document.getElementById('prefEvent').value=saved;
+                    document.getElementById('prefMsg').textContent=`Welcome back! your preference: ${saved}`;
+                }
+            }
+            function clearPreferences(){
+                localStorage.clear();
+                sessionStorage.clear();
+                document.getElementById('prefEvent').value=' ';
+                document.getElementById('prefMsg').textContent=` Preference Cleared!`;
             }
         </script>
     </body>
